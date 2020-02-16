@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_033710) do
 
   create_table "folders", force: :cascade do |t|
     t.string "name"
+    t.integer "parent_folder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
