@@ -1,4 +1,4 @@
-class FolderRecipesController < ApplicationController
+class FolderRecipesController < APIController
   def index
   end
 

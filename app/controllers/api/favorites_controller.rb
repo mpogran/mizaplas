@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class FavoritesController < APIController
   def index
   end
 

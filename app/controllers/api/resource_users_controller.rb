@@ -1,4 +1,4 @@
-class ResourceUsersController < ApplicationController
+class ResourceUsersController < APIController
   def index
   end
 
