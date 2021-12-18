@@ -1,0 +1,208 @@
+# Search
+/api/search:
+  get: Recipe search engine
+
+# Users
+/api/users:
+  post: Create a User
+    parameters:
+      user:
+        - email
+        - password
+        - password_confirmation
+api/users/{id}:
+  get: Get current authenticated User
+  patch: Update current authenticated User
+    parameters:
+      user:
+        - email
+        - password
+        - password_confirmation
+        - name
+  delete: Delete current authenticated User
+    note: Soft-delete
+
+# User Favorites
+/api/users/{id}/favorites:
+  get: Get all Favorites for current authenticated User
+/api/users/{id}/favorites/{resource_type}:
+  get: Get {resource} Favorites for current authenticated User
+  post: Create Favorite for current authenticated User
+    parameters:
+      favorite:
+        - {resource_type}_id
+    note: Update join-model for provided ID
+/api/users/{id}/favorites/{resource}/{id}:
+  delete: Delete a Favorite
+    note: Update join-model for provided ID
+
+# User Lists
+/api/users/{id}/lists:
+  get: Get Lists for current authenticated User
+  post: Create a List for current authenticated User
+    parameters:
+      list:
+        - title
+
+# User Folders
+/api/users/{id}/folders:
+  get: Get Folders for current authenticated User
+    note: Returns Recipes and Folders contained
+  post: Create a Folder for current authenticated User
+    parameters:
+      folder:
+        - name
+        - parent_folder_id
+
+# User Recipes
+/api/users/{id}/recipes:
+  get: Get all Recipes for current authenticated User
+  post: Create a Recipe for current authenticated User
+    parameters:
+      recipe:
+        - title
+        - author
+        - source
+        - instructions
+        - fields:
+            - type
+            - value
+
+# Recipes
+/api/recipes/{id}:
+  get: Get a Recipe
+  patch: Update a Recipe
+    parameters:
+      recipe:
+        - title
+        - author
+        - source
+        - instructions
+  delete: Delete a Recipe
+    note: Soft-delete
+
+# Recipe Fields
+/api/recipes/{recipe_id}/fields:
+  post: Add a Field to a Recipe
+  parameters:
+    field:
+      - type
+      - value
+/api/recipes/{recipe_id}/fields/{id}:
+  patch: Update a Field for a Recipe
+    parameters:
+      field:
+        - value
+  delete: Remove a Field from a Recipe
+    note: Soft-delete
+
+# Recipe Ingredients
+/api/recipes/{recipe_id}/ingredients:
+  post: Add an Ingredient to a Recipe
+    parameters:
+      ingredient:
+        - name
+        - quantity
+        - unit
+/api/recipes/{recipe_id}/ingredients/{id}:
+  patch: Update an Ingredient for a Recipe
+    parameters:
+      ingredient:
+        - name
+        - quantity
+        - unit
+  delete: Remove an Ingredient from a Recipe
+    note: Soft-delete
+
+# Recipe Users
+/api/recipes/{recipe_id}/users:
+  get: Get Users associated with a Recipe
+  post: Associate User with a Recipe
+    parameters:
+      user:
+        - id
+/api/recipes/{recipe_id}/users/{id}:
+  delete: Disassociate User from a Recipe
+    note: Soft-delete
+
+# Lists
+/api/lists/{id}:
+  get: Get a List
+  patch: Update a List
+    parameters:
+      list:
+        - title
+  delete: Delete a List
+    note: Soft-delete
+
+# List Ingredients
+/api/lists/{list_id}/ingredients:
+  post: Add an Ingredient to a List
+    parameters:
+      ingredient:
+        - name
+        - quantity
+        - unit
+/api/lists/{list_id}/ingredients/{id}:
+  patch: Update an Ingredient for a List
+    parameters:
+      ingredient:
+        - name
+        - quantity
+        - unit
+  delete: Remove an Ingredient from a List
+    note: Soft-delete
+
+# List Recipes
+/api/lists/{list_id}/recipes:
+  post: Associate a Recipe with a List
+    parameters:
+      recipe:
+        - id
+/api/lists/{list_id}/recipes/{id}:
+  delete: Remove a Recipe from a List
+    note: Soft-delete
+
+# List Users
+/api/lists/{list_id}/users:
+  get: Get Users associated with a List
+  post: Associate User with a List
+    parameters:
+      user:
+        - id
+/api/lists/{list_id}/users/{id}:
+  delete: Disassociate User from a List
+    note: Soft-delete
+
+# Folders
+/api/folders/{id}:
+  get: Get a Folder
+  patch: Update a Folder
+    parameters:
+      folder:
+        - name
+        - parent_folder_id
+  delete: Delete a Folder
+    note: Soft-delete
+
+# Folders Recipes
+/api/folders/{folder_id}/recipes:
+  get: Get Recipes in a Folder
+  post: Add a Recipe to a Folder
+    parameters:
+      recipe:
+        - id
+/api/folders/{folder_id}/recipes/{id}:
+  delete: Remove a Recipe from a Folder
+    note: Soft-delete
+
+# Folder Users
+/api/folders/{folder_id}/users:
+  get: Get Users associated with a Folder
+  post: Associate User with a Folder
+    parameters:
+      user:
+        - id
+/api/folders/{folder_id}/users/{id}:
+  delete: Disassociate User from a Folder
+    note: Soft-delete
